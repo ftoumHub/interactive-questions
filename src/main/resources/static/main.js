@@ -43,11 +43,34 @@ function handleSubmit(e) {
     if (parseInt(monChamps.value, 10) === bonneReponse) {
         state.score++;
         pointsRequis.textContent = 10 - state.score;
+        nouveauProbleme();
     } else {
         state.mauvaisesReponses++;
         erreursPermises.textContent = 2 - state.mauvaisesReponses;
     }
+    checkWonOrLost();
+}
+
+function checkWonOrLost() {
+    // si gagné
+    if (state.score === 10) {
+        alert("Félicitations! Vous avez gagné.");
+        resetGame();
+    }
+
+    // si perdu
+    if (state.mauvaisesReponses === 3) {
+        alert("Désolé, vous avez perdu.");
+        resetGame();
+    }
+}
+
+function resetGame() {
     nouveauProbleme();
+    state.score = 0;
+    state.mauvaisesReponses = 0;
+    pointsRequis.textContent = 10;
+    erreursPermises.textContent = 2;
 }
 
 /**
